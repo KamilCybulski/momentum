@@ -9,16 +9,17 @@ import Todo from './components/todo.js';
 
 class App extends Component {
   
-  /*
-  componentWillMount(){
-    var num = 1;
-    document.querySelector('screen').classList.add(`bgi${num}`);
+  
+  componentDidMount(){
+    var num = 2;
+    document.querySelector('#page').classList.add(`bgi${num}`);
+    
   }
-  */
+  
   
   render() {
     return (
-      <div className="screen">
+      <div id="page" className="screen">
         <Clock />
         <Weather />
         <Greetings />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './settings.css';
 import User from './user';
-import Switch from './switch';
 
 
 
@@ -10,39 +9,6 @@ export default class Settings extends Component {
   toggleSettings(){
     var settingsClass = document.querySelector(".settings").classList;
     settingsClass.toggle('hideSettings');
-  }
-
-
-
-  componentDidMount(){
-    var settings = JSON.parse(localStorage.getItem('settings')) ||
-      {'general': {
-        'Weather': true,
-        'Clock': true,
-        'Focus': true,
-        'ToDo': true
-        }
-      };
-
-    for (var key in settings.general){
-        if (!settings.general[key]){
-            document.getElementById(key).classList.add('bitOff');
-        }
-    }
-
-    console.log(localStorage.getItem('settings'));
-    console.log(settings)
-
-
-    document.querySelector('.setGeneral').addEventListener('click', function(e){
-      if(~e.target.className.indexOf('toggleBit')){ // if a toggle is clicked
-        document.getElementById(e.target.id).classList.toggle('bitOff');
-        settings.general[e.target.id] = !settings.general[e.target.id];
-        console.log(settings.general[e.target.id]);
-        console.log(JSON.stringify(settings));
-        localStorage.setItem('settings', JSON.stringify(settings));
-      }
-    });
   }
 
   render() {
@@ -60,13 +26,14 @@ export default class Settings extends Component {
           </div>
           <div className="setGeneral shown">
             <User />
-            <div className="onOff" onClick={this.toggleField}>
+            <div className="onOff">
               <div className="miniTitle"><strong>Widgets</strong></div>
               <div className="underline" />
-              <Switch item={'Weather'} />
-              <Switch item={"Clock"} />
-              <Switch item={"Focus"} />
-              <Switch item={"Todo"} />
+              <button onClick={this.props.weatherSwitcher}>weather</button>
+              <button onClick={this.props.clockSwitcher}>clock</button>
+              <button onClick={this.props.greetingSwitcher}>greeting</button>
+              <button onClick={this.props.quoteSwitcher}>quote</button>
+              <button onClick={this.props.todoSwitcher}>todo</button>
             </div>
           </div>
           <div className="setTodo hidden">

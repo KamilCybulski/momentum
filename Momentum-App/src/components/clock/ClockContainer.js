@@ -7,13 +7,20 @@ class ClockContainer extends Component {
         this.state = {
             currTime24: "",
             currTime12: "",
-            hour12: false
+            hour12: false,
+            clockIntervalId: ""
         }
     }
 
+
     componentDidMount(){
         this.getTime();
-        setInterval(this.getTime, 1000);
+        const intervalId = setInterval(this.getTime, 1000);
+        this.setState({clockIntervalId: intervalId})
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.state.clockIntervalId);
     }
 
     getTime = () => {

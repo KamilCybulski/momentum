@@ -59,8 +59,11 @@ export default class WeatherContainer extends Component {
   }
   //Process all the data and update the state
   insertWeatherData = (data)=>{
+
+    //this is for determining if temp should be initially shown in *F instead of *C
     let countriesUsingF = ["United States of America", "Cayman Islands", "Bahamas", "Belize"];
     let country = data.location.country;
+
     this.setState({
       temp_c: data.current.temp_c.toFixed(0) + "*C",
       temp_f: data.current.temp_f.toFixed(0) + "*F",
@@ -89,10 +92,10 @@ export default class WeatherContainer extends Component {
   }
   render() {
     if(this.state.msg){
-      return (<WeatherBarError msg={this.state.msg} />);
+      return (<WeatherBarError msg={this.state.msg} hide={this.props.hide} />);
     }else {
     return (
-      <WeatherBar temp={this.state.temp_used} sky={this.state.sky} location={this.state.location} onClick={this.handleClickUnits} />
+      <WeatherBar temp={this.state.temp_used} sky={this.state.sky} location={this.state.location} onClick={this.handleClickUnits} hide={this.props.hide} />
     );
     }
   }

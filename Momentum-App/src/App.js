@@ -61,7 +61,7 @@ constructor(){
     return (
       <div className="screen">
         {this.state.renderClock ? <ClockContainer /> : null}
-        {this.state.renderWeather ? <WeatherContainer /> : null}
+        {this.state.renderWeather ? <WeatherContainer /> : <WeatherContainer hide={true} />}
         {this.state.renderTodo ? <Todo /> : null}
         {this.state.renderGreeting ? <GreetingContainer /> : null}
         <Settings weatherSwitcher={this.weatherSwitcher}
